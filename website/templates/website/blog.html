@@ -1,0 +1,65 @@
+{%extends 'website/base.html'%}
+{% block title%} Blogs {% endblock %} 
+{% block blogactive %} active {% endblock blogactive %}
+{% load static %}
+{% block content %}
+{% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}<script>alert("{{ message }}")</script> {% endif %}
+        {% endfor %}
+{% endif %}
+
+<section id="blog" class="blog">
+    <div class="breadcrumb-area contact bg-overlay ">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-text">
+                        <div class="breadcrumb-link">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>Blogs</span>
+                        </div>
+                        <h2>Blogs</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" data-aos="fade-up">
+        <div class="row px-5">
+            <div class="section-head col-sm-12 mt-5">
+              <h4><span>Travel Blogs</span></h4>
+            </div>
+            {% for i in blogs %}
+    
+            <div class="col-xl-4 col-md-6 d-flex flex-wrap align-content-stretch mb-5">
+                <div class="blog-entry">
+                    <div class="blog-image">
+                        <a href="{% url 'blogdetails' title=i.blog_title %}">
+                            <img src="{{i.blog_image.url}}" class="img-fluid rounded">
+                            <span class="blog-post-date">
+                                <i class="fa fa-calendar"></i>{{i.blog_date}}
+                            </span>
+                        </a>
+                    </div>
+                    <div class="blog-contains">
+                        <a href="{% url 'blogdetails' title=i.blog_title %}">
+                            <h2>{{i.blog_title|capfirst}}</h2>
+                        </a>
+                        <div class="blog-post d-flex justify-content-between align-items-center">
+                            <div>
+                                <figure class="author-figure mb-0 mr-3 float-left">
+                                    <img src="{{i.user_image.url}}" class="img-fluid">
+                                </figure>
+                                <span class="d-inline-block mt-1">By <a href="">{{i.user_name|capfirst}}</a></span>
+                            </div>
+                            <a href="{% url 'blogdetails' title=i.blog_title %}" class="btn btn-read-more">Read More</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

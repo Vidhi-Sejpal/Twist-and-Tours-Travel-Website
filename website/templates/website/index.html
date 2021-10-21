@@ -1,0 +1,349 @@
+{%extends 'website/base.html'%}
+{% block title%} Home {% endblock %} 
+{% block homeactive %} active {% endblock homeactive %}
+{% load static %}
+{% block content %}
+{% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}<script>alert("{{ message }}")</script> {% endif %}
+        {% endfor %}
+{% endif %}
+<!-- Start slides -->
+<div id="slides" class="cover-slides">
+    <ul class="slides-container">
+        <li class="text-center">
+            <img src="https://cdn.kimkim.com/files/a/content_articles/featured_photos/2afe680f438ab7f31cad3426fb31d277e8f1fe16/big-0c8da4b55236092e6fa7fb32290e9a7f.jpg" alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="animate__animated animate__fadeInDown">Welcome To Twist and Tours</h1>
+                        <p class="animate__animated animate__fadeInUp">Pocket Friendly Packages, Student Trips,Corporate Trips, Staycations & Much More.</p>
+                        <div class="container h-100">
+                            <div class="d-flex justify-content-center h-100">
+                              <form action="{% url 'searchdest' %}" method="get">
+                                <div class="searchbar">
+                                    <input class="search_input" type="text" placeholder="Where do you wanna go?" name="querydest" id="querydest" >
+                                    <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+                                </div>
+                              </form>
+                               
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="text-center">
+            <img src="https://res.cloudinary.com/dwzmsvp7f/image/fetch/q_75,f_auto,w_1316/https%3A%2F%2Fmedia.insider.in%2Fimage%2Fupload%2Fc_crop%2Cg_custom%2Fv1580318465%2Fepbzs1rysoadj0a0lptg.jpg" alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Explore Your Travel</h1>
+                        <p>Discover your next great adventure, become an explorer to get started!</p>
+                        <p><a class="btn btn-lg btn-circle btn-outline-new-white" href="#why-choose-us">Explore Now</a></p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="text-center">
+            <img src="https://www.sinceindependence.com/wp-content/uploads/2019/01/P1020600-e1354132016545.jpg" alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" >
+                        <h1>Come and Feel Alive</h1>
+                        <p>Pocket Friendly Packages, Student Trips,Corporate Trips, Staycations & Much More.</p>
+                        <p><a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'tours' %}">Book Now</a></p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="slides-navigation">
+        <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+<!---------------------------------------------Trending Trips--------------------------------------->
+<section id="trendingtrips">
+    <div class="container-fluid mt-5">
+        <div class="section-head col-sm-12">
+            <h4><span>Trending Trips</span></h4>
+          </div>
+        <div class="row px-5" id="carousel-row" style="margin-top: 40px;">
+            <div class="col-12">
+                <div id="carousel" class="owl-carousel">
+                    {% for i in trending_trips %}
+                    <div class="trending-trips">
+                        <div class="trending-trips-image">
+                            <a href="{{i.trip_drive_link}}">
+                                <img src="{{ i.trip_image.url }}">
+                            </a>
+                            <h3 class="price">₹ {{ i.trip_price }}</h3>
+                        </div>
+                        <div class="trending-trips-info">
+                            <a href="{{i.trip_drive_link}}"><h3>{{ i.trip_title }}</h3></a>
+                            <h3 class="days">{{ i.trip_days }} Days Tour</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
+
+
+<!---------------------------------------------Services---------------------------------------------->
+<section id="services" class="services">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+            <div class="section-head col-sm-12">
+              <h4><span>Why Choose</span> Us?</h4>
+            </div>
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-clipboard-list"></i></i></div>
+            <h4>Spectrum of travel packages</h4>
+            <p>A wide arrange of exclusive travel holiday awaits you. Take a dip in, to choose your next striking trip with us.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-hotel"></i></div>
+            <h4>Travel Pursuit</h4>
+            <p>To nurture your perfect holiday is what we aim for. Mind full of questions can take you for a ride, but why worry when we are at your service?</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-campground"></i></div>
+            <h4>Adventure Paradise</h4>
+            <p>We believe in providing adventure trips encapsulated with electrifying and relishing touch along with safe and comfortable travel, which makes it an unforgettable lifetime experience. </p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-bed"></i></div>
+            <h4>Happy-go-lucky</h4>
+            <p>Ensuring seamless flow of travel with a leisure room to create magical moments with your loved ones along with the surreal wilderness is our at most priority. Travel hassle-free as all your requirements are mothered by us.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-laptop"></i></div>
+            <h4>Seamless Booking</h4>
+            <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-headphones-alt" aria-hidden="true"></i></div>
+            <h4>24X7 Call Support</h4>
+            <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+<!---------------------------------------------Counts------------------------------------------------->
+<section id="counter-stats" class="counts wow fadeInRight" data-wow-duration="10s">
+    <div class="container">
+      <div class="text-center title">
+        <h3>Why we are the best?</h3>
+      </div>
+       <div class="row">
+        <div class="col-lg-4 col-md-4 stats ">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <div class="d-flex justify-content-center">
+            <div class="counting" data-count="3000">0</div>
+            <h5 class="info"> + </h5>
+          </div>
+          <h5>Customers</h5>
+        </div>
+        <div class="col-lg-4 col-md-4 stats ">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <div class="d-flex justify-content-center">
+              <div class="counting" data-count="500">0</div>
+              <h5 class="info"> + </h5>
+            </div>
+            <h5>5 star Ratings</h5>
+        </div>
+        <div class="col-lg-4 col-md-4  stats ">
+            <i class="fa fa-list" aria-hidden="true"></i>
+            <div class="d-flex justify-content-center">
+              <div class="counting" data-count="50">0</div>
+              <h5 class="info"> + </h5>
+            </div>
+            <h5>Itineraries</h5>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<!---------------------------------------------Weekend Destinations---------------------------------->
+<section class="popular-destination bg-gray mt-5">
+    <div class="container" data-aos="fade-up">
+        <div class="section-head col-sm-12">
+            <h4><span>Weekend Destinations</span></h4>
+        </div>
+            <div class="row" style="margin-top: 60px;">
+            {% for i in weekend_trips %}
+            <div class="col-xl-4 col-md-6">
+                <div class="popular-places">
+                    <div class="image">
+                        <a href="{{i.trip_drive_link}}">
+                            <img src="{{ i.trip_image.url }}" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="place-info">
+                        <h4 class="price">₹{{ i.trip_price }}</h4>
+                        <h3><a href="{{i.trip_drive_link}}">{{ i.trip_title }}</a></h3>
+                        <p>{{i.trip_description}}</p>
+                        <ul class="info clearfix d-flex justify-content-between">
+                            <li><i class="fa fa-calendar"></i>  {{ i.trip_days }}days</li> |
+                            <li><i class="far fa-map"></i>  {{i.trip_location}}</li>
+                        </ul>
+                        <div class="btn-book">
+                            <a href="{% url 'tourbook' trip_title=i.trip_title %}">Book Now</a>
+                        </div>
+                    </div> 
+                </div>
+            </div> 
+            {% endfor %}   
+        </div>
+            <div class="view-trip-button text-center">
+                <a href="{% url 'tours' %}" class="btn view-trip">View all Trips</a>
+            </div>
+    </div>
+</section>
+
+<!------------------------------------------Book Now Breadcrum------------------------------------------>
+<section id="cta" class="cta">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 text-center text-lg-center">
+          <h3>Join and Trip With Us</h3>
+          <p>We are a boutique travel-firm curating your travel journey just the way you like it.We take Corporate as well as College Trips.</p>
+          <div class="mb-0">
+              <a href="{% url 'tours' %}" class="btn btn-white px-4 py-3">Explore Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<!---------------------------------------------Backpacking Trips---------------------------------------------------->
+<section class="popular-destination bg-gray">
+    <div class="container" data-aos="fade-up">
+        <div class="section-head col-sm-12">
+            <h4><span>Backpacking Trips</span></h4>
+        </div>
+        <div class="row" style="margin-top: 60px;">
+            {% for i in backpacking_trips %}
+            <div class="col-xl-4 col-md-6">
+                <div class="popular-places ">
+                    <div class="image">
+                        <a href="{{i.trip_drive_link}}">
+                            <img src="{{ i.trip_image.url }}" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="place-info">
+                        <h4 class="price">₹{{ i.trip_price }}</h4>
+                        <h3><a href="{{i.trip_drive_link}}">{{ i.trip_title }}</a></h3>
+                        <p>{{i.trip_description}}</p>
+                        <ul class="info clearfix d-flex justify-content-between">
+                            <li><i class="fa fa-calendar"></i>  {{ i.trip_days }}days</li> |
+                            <li><i class="far fa-map"></i>  {{i.trip_location}}</li>
+                        </ul>
+                        <div class="btn-book">
+                            <a href="{% url 'tourbook' trip_title=i.trip_title %}">Book Now</a>
+                        </div>
+                    </div> 
+                </div>
+            </div> 
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!---------------------------------------------video---------------------------------------------------->
+<section id="hero">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-8 text-center">
+          <h1>Explore Your Travel with us</h1>
+          <a href="https://www.youtube.com/watch?v=nkwLjnragtw" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+        </div>
+      </div>
+    </div>
+</section>
+<!---------------------------------------------Treks---------------------------------------------------->
+<section class="popular-destination bg-gray">
+    <div class="container" data-aos="fade-up">
+        <div class="section-head col-sm-12">
+            <h4><span>Treks</span></h4>
+        </div>
+        <div class="row" style="margin-top: 60px;">
+            {% for i in treks %}
+            <div class="col-xl-4 col-md-6">
+                <div class="popular-places ">
+                    <div class="image">
+                        <a href="{{i.trip_drive_link}}">
+                            <img src="{{ i.trip_image.url }}" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="place-info">
+                        <h4 class="price">₹{{ i.trip_price }}</h4>
+                        <h3><a href="{{i.trip_drive_link}}">{{ i.trip_title }}</a></h3>
+                        <p>{{i.trip_description}}</p>
+                        <ul class="info clearfix d-flex justify-content-between">
+                            <li><i class="fa fa-calendar"></i>  {{ i.trip_days }}days</li> |
+                            <li><i class="far fa-map"></i>  {{i.trip_location}}</li>
+                        </ul>
+                        <div class="btn-book">
+                            <a href="{% url 'tourbook' trip_title=i.trip_title %}">Book Now</a>
+                        </div>
+                    </div> 
+                </div>
+            </div> 
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!---------------------------------------------Testimonals----------------------------------------------->
+<section id="testimonials" class="testimonials">
+    <div class="container" data-aos="fade-up">  
+        <div class="section-head col-sm-12" style="padding-top: 40px;">
+            <h4><span>What Our Clients Say</span></h4>
+        </div>
+      <div class="owl-carousel testimonials-carousel">
+        {% for i in reviews %}
+        <div class="testimonial-wrap">
+          <div class="testimonial-item">
+            <img src="{{i.user_image.url}}" class="testimonial-img" alt="">
+            <h3>{{i.user_name}}</h3>
+            <p>
+              <i class="fas fa-quote-left"></i>
+              {{i.review_description}}
+              <i class="fas fa-quote-right"></i>
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    
+    </div>
+</section>
+
+{% endblock %}

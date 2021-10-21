@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        h3,h4{
+            color: #000;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        span{
+            color: #161212;;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <h3>Booking for the trip <b>{{dst_title|capfirst}}</b> has beeen done by <b>{{fname|capfirst}} {{lname|capfirst}}</b> </h3>
+    <h4>Name : <span>{{fname|capfirst}} {{lname|capfirst}}</span></h4>
+    <h4>Email Address : <span>{{email}}</span></h4>
+    <h4>Phone Number : <span>{{number}}</span></h4>
+    <h4>Gender : <span>{{gender}}</span></h4>
+    <h4>Country : <span>{{country}}</span></h4>
+    <h4>No of Travellers : <span>{{travellers}}</span></h4>
+    <h4>Address of the Customer : <span>{{address}}</span></h4>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{%extends 'website/base.html'%}
+{% block title %} Search {% endblock %} 
+{% load static %}
+{% block content %}
+<section id="search" class="search" style="margin-top: 100px;">
+    <div class="container">
+            <div class="text-center search-title col-sm-12" style="margin-top: 150px;">
+                <h4>Search Results For :<span> {{querydest|capfirst}}</span></h4>
+            </div>
+            <div class="row" style="margin-top: 60px;">
+            {% for i in alldest %}
+            <div class="col-xl-4 col-md-6">
+                <div class="popular-places">
+                    <div class="image">
+                        <a href="{{i.trip_drive_link}}">
+                            <img src="{{ i.trip_image.url }}" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="place-info">
+                        <h4 class="price">₹{{ i.trip_price }}</h4>
+                        <h3 class="days">{{ i.trip_days }} Days Tour</h3>
+                        <a href="{{i.trip_drive_link}}"><h3>{{ i.trip_title }}</h3></a>
+                        <p>{{ i.trip_description }}</p>
+                    </div>
+                </div>
+            </div> 
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

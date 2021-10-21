@@ -1,0 +1,59 @@
+{%extends 'website/base.html'%}
+{% block title%} Search {% endblock %} 
+{% load static %}
+{% block content %}
+<section id="search" class="search" style="margin-top: 100px;">
+    <div class="container">
+            <div class="text-center search-title col-sm-12" style="margin-top: 150px;">
+                <h4>Search Results For :<span> {{query}}</span></h4>
+            </div>
+            {% if allblogs|length < 1 %}
+            <div class="row bg-light">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="search-post">   
+                        <p class="no-search"><b>No search results</b></p>
+                            <p class="mb-2">Your search query : <b>gg</b> did not match any documents.</p>
+                            <p class="no-search"><b style="color: #ff1616;">Suggestions</b></p>
+                            <ul class="suggest ml-2"> 
+                                <li>1. Make sure that all words are spelled correctly.</li>
+                                <li>2. Try more general keywords.</li>
+                                <li>3. Try fewer keywords.</li>
+                                <li>4. Try different keywords.</li>
+                            </ul>  
+                    </div>
+                </div>
+            </div>
+           
+            {% endif %}
+        <div class="row">
+            <div class="col-12">
+                {% for i in allblogs %}
+                <div class="search-box row  d-flex align-items-center mb-5 mt-5">
+                    <div class="col-lg-5 search-left px-0">
+                        <div class="search-image">
+                            <a href="{% url 'blogdetails' title=i.blog_title %}">
+                                <img src="{{i.blog_image.url}}" class="img-fluid">
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="col-lg-7 search-right">
+                        <a href="{% url 'blogdetails' title=i.blog_title %}">
+                            <h4>{{i.blog_title|capfirst}}</h4>
+                        </a>
+                        <p>{{i.blog_description|safe|slice:":250"}}...</p>
+                        <div class="blog-post align-items-center text-left clearfix">
+                            <figure class="author-figure mb-0 mr-3 float-left">
+                                <img src="{{i.user_image.url}}" class="img-fluid">
+                            </figure>
+                            <span class="d-inline-block mt-1">By <a href="">{{i.user_name|capfirst}}</a></span>
+                            <span>&nbsp;-&nbsp; {{i.blog_date}}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

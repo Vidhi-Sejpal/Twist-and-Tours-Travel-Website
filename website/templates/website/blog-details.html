@@ -1,0 +1,100 @@
+{%extends 'website/base.html'%}
+{% block title%} {{title}} {% endblock %} 
+{% load static %}
+{% block content %}
+<section id="blogdetails">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb small-navbar">
+                      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'blogs' %}">Blogs</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{title}}</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog-details-post pb-5">
+                    {% for i in blogdetails %}
+                    <div class="blog-post-image">
+                        <img class="img-fluid" src="{{i.blog_image.url}}">
+                    </div>
+                    <div class="blog-details-contains">
+                        <h2>{{ i.blog_title|capfirst }}</h2>
+                        <p>{{ i.blog_description|safe }}</p>
+                    </div>
+                    <div class="blog-author">
+                        <div class="media d-flex align-items-center">
+                            <img src="{{i.user_image.url}}">
+                            <div class="media-body">
+                                <a href=""><h4>{{i.user_name|capfirst}}</h4></a>
+                                <p>{{i.blog_date}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar-wiget">
+                    <div class="sidebar-item search-form">
+                        <form action="{% url 'search' %}" method="GET">
+                          <input type="text" placeholder="Search Blogs" name="query" id="query" >
+                          <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                      </div>
+                </div>
+                <div class="sidebar-wiget">
+                    <div class="sidebar_title">
+                        <h3>Popular Blogs</h3>
+                    </div>
+                    {% for i in popular_blog %}
+                    <div class="popular-blogs">
+                        <div class="popular-blogs-img">
+                            <a href="{% url 'blogdetails' title=i.blog_title %}">
+                                <img src="{{i.blog_image.url}}">
+                            </a>
+                        </div>
+                        <div class="popular-blogs-text">
+                            <a href="{% url 'blogdetails' title=i.blog_title %}">
+                                <h3>{{ i.blog_title|capfirst }}</h3>
+                            </a>
+                            <p><span>By {{i.user_name|capfirst}}</span> | {{i.blog_date}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="sidebar-wiget share-icons">
+                    <div class="sidebar_title">
+                        <h3>Share this post</h3>
+                    </div>
+                    <div class="social_share_icon tags">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="https://twitter.com/intent/tweet?text={{ title }}%0a%0a&url={{ request.build_absolute_uri|urlencode }}" target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://api.whatsapp.com/send?text=%0a%0a*{{ title }}*%0a%0a{{ request.build_absolute_uri|urlencode }}" target="_blank">
+                                    <i class="fa fa-whatsapp"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri|urlencode }}" target="_blank">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

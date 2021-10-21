@@ -1,0 +1,59 @@
+{%extends 'website/base.html'%}
+{% block title%} About {% endblock %} 
+{% block aboutactive %} active {% endblock aboutactive %}
+{% load static %}
+{% block content %}
+<section id="contact-us">
+    <div class="breadcrumb-area contact bg-overlay ">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-text">
+                        <div class="breadcrumb-link">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>AboutUs </span>
+                        </div>
+                        <h2>About Us</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="about-area">
+        <div class="container-fluid" data-aos="fade-up">
+            <div class="row px-5">
+                <div class="about-image col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner">
+                        <div class="image-box clearfix">
+                            <figure class="image">
+                                <img src="{% static 'images/about-1.jpeg'%}" alt="">
+                            </figure>
+                            <figure class="image">
+                                <img src="{% static 'images/about-2.jpeg'%}" alt="">
+                            </figure>
+                            <figure class="image">
+                                <img src="{% static 'images/about-3.jpeg'%}" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="about-main-title">
+                        <h5>About Twist and Tours</h5>
+                    </div>
+                    <div class="about-title">
+                        <h2>We provide affordable and best travel services to all our customers.</h2>
+                    </div>
+                    <div class="about-text">
+                        <p>Twist and tours is a travel enterprise sprouting out of Delhi NCR. It hosts a niche travel network providing services for transportation, stays, and sightseeing all across India. We intend to feed the wanderlust within you. Whether it be like a bike ride in the Himalayas or stay at a cottage by the beach. Twist and tours can help you do it all.</p>
+                        <p>We organize weekend gateways from Delhi NCR. Road trips, treks, backpacking trips, college trips, corporate tours in North and South India.
+                        We also organize customized corporate team outings focussed on team-building activities throughout India. Group tours and treks from mountains to seas we have covered almost everything.
+                        We arrange the best trips for Himachal, Uttarakhand, Rajasthan, and Goa.</p>
+                        <p>We intend to deliver a safe and hygienic travel solution once the covid situation normalizes. Right from your pick up at the doorstep till you arrive at your sanitized cottage in the snowy Himalayas, We shall handle it all.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

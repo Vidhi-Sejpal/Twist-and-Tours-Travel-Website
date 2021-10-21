@@ -1,0 +1,249 @@
+{%extends 'website/base.html'%}
+{% block title%} Tours {% endblock %} 
+{% block toursactive %} active {% endblock toursactive %}
+{% load static %}
+{% block content %}
+<section id="tours">
+    <div class="breadcrumb-area contact bg-overlay ">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-text">
+                        <div class="breadcrumb-link">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>Tours</span>
+                        </div>
+                        <h2>Tours</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <h3 class="tourlength">Showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} Tour Results
+                {% if request.get_full_path == "/tours" %}
+                {% else %}
+                <div class="btn-clear">
+                    <a href="{% url 'tours' %}">Clear filter</a> 
+                </div>
+                {% endif %}
+            </h3>
+        </div>   
+
+        <div class="row mt-4 mb-2" data-aos="fade-up">
+            <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                <div class="row">
+                    {% for i in page_obj.object_list %}
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="tour-places">
+                            <div class="tour-image">
+                                <a href="{{i.trip_drive_link}}">
+                                    <img src="{{ i.trip_image.url }}" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="tour-info">
+                                <h3>{{ i.trip_title }}</h3>
+                                <h4>₹{{ i.trip_price }}<span> / Per person</span></h4>
+                                <ul class="info clearfix d-flex justify-content-between">
+                                    <li><i class="far fa-clock"></i> {{ i.trip_days }} Days Tour</li> |
+                                    <li><i class="far fa-map"></i> {{i.trip_location}}</li>
+                                </ul>
+                                <div class="btn-box d-flex">
+                                    <a href="{{i.trip_drive_link}}" class="explore-details" target="_blank">Explore Details</a>
+                                    <a href="{% url 'tourbook' trip_title=i.trip_title %}" class="explore-details ml-2">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}   
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="default-sidebar tour-sidebar ml-20">
+                    <div class="sidebar-widget category-widget">
+                        <div class="widget-title">
+                            <h3>Category</h3>
+                        </div>
+                        <div class="widget-content">
+                            <div class="custom-control custom-radio d-block my-3">
+                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" onclick="window.location.assign('?category=Weekend Trips')" 
+                                {% if category == 'Weekend Trips'%} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio1">Weekend Trips</label>
+                            </div>
+                            <div class="custom-control custom-radio d-block my-3">
+                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" onclick="window.location.assign('?category=Backpacking Trips')" 
+                                {% if category == 'Backpacking Trips'%} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio2">Backpacking Trips</label>
+                            </div>
+                            <div class="custom-control custom-radio d-block my-3">
+                                <input type="radio" id="customRadio3" name="customRadio"  class="custom-control-input" onclick="window.location.assign('?category=Trending Trips')"
+                                {% if category == 'Trending Trips'%} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio3">Trending Trips</label>
+                            </div>
+                            <div class="custom-control custom-radio d-block my-3">
+                                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" onclick="window.location.assign('?category=Treks')"
+                                {% if category == 'Treks'%} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio4">Treks</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget price-filter">
+                        <div class="widget-title">
+                            <h3>Price Range</h3>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+                                <b class="minprice">₹ 5,000</b>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6 text-right">
+                                <b class="maxprice">₹ 60,000</b>
+                            </div>
+                        </div>
+                        
+                        <div class="range-slider"><span class="range-slider-selection"></span>
+                            <input class="range-slider-min" type="range" min="5000" max="60000" step="1" value="5000" id="minprice"/>
+                            <input class="range-slider-max" type="range" min="5000" max="60000" step="1" value="60000" id="maxprice"/>
+                        </div>
+                        <button type="submit" class="btn btn-apply" onclick="window.location.assign('?value='+document.getElementById('minprice').value + ',' + document.getElementById('maxprice').value)">Apply</button>
+                    
+                    </div>
+                    <div class="sidebar-widget duration-widget">
+                        <div class="widget-title">
+                            <h3>Tour Length</h3>
+                        </div>
+                        <div class="widget-content">
+                            <div class="custom-control custom-radio d-block my-3">
+                                <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input" onclick="window.location.assign('?tour_length=2,4')"
+                                {% if length == '2,4'%} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio5">2-4 days</label>
+                            </div>
+                            <div class="custom-control custom-radio d-block my-3">
+                                <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input" onclick="window.location.assign('?tour_length=5,7')"
+                                {% if length == '5,7'%} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio6">5-7 days</label>
+                            </div>
+                            <div class="custom-control custom-radio d-block my-3">
+                                <input type="radio" id="customRadio7" name="customRadio" class="custom-control-input" onclick="window.location.assign('?tour_length=8,10')"
+                                {% if length == '8,10'%} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio7">8-10 days</label>
+                            </div>
+                            <div class="custom-control custom-radio d-block my-3">
+                                <input type="radio" id="customRadio8" name="customRadio" class="custom-control-input" onclick="window.location.assign('?tour_length=11,13')"
+                                {% if length == '11,13'%} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio8">11-13 days</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagination-gallery mb-3  text-center">
+            <nav class="pagination-outer" aria-label="Page navigation">
+                {% if page_obj.has_other_pages %}
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        {% if 'tour_length' in request.get_full_path %}  
+                        <li class="page-item">
+                            <a href="{{ request.get_full_path }}?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        {% elif 'category' in request.get_full_path %} 
+                        <li class="page-item">
+                            <a href="{{ request.get_full_path }}?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        {% elif 'value' in request.get_full_path %} 
+                        <li class="page-item">
+                            <a href="{{ request.get_full_path }}?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        {% else %} 
+                        <li class="page-item">
+                            <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    <li class="page-item active">
+                        <a class="page-link" href="#">
+                            {{ i }}
+                        </a>
+                    </li>
+                    {% else %}
+                        {% if 'tour_length' in request.get_full_path %}  
+                            <li class="page-item">
+                                <a class="page-link" href="{{ request.get_full_path }}&page={{ i }}">{{ i }}</a>
+                            </li>
+                        {% elif 'category' in request.get_full_path %}
+                            <li class="page-item">
+                                <a class="page-link" href='{{ request.get_full_path }}&page={{ i }}'>{{ i }}</a>
+                            </li>
+                        {% elif 'value' in request.get_full_path %}
+                            <li class="page-item">
+                                <a class="page-link" href='{{ request.get_full_path }}&page={{ i }}'>{{ i }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                            </li>
+                        {% endif %}   
+
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        {% if 'tour_length' in request.get_full_path %}  
+                        <li class="page-item">
+                            <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}" style="border-radius: 50%;">
+                                <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                        {% elif 'category' in request.get_full_path %}  
+                        <li class="page-item">
+                            <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}" style="border-radius: 50%;">
+                                <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                        {% elif 'value' in request.get_full_path %}  
+                        <li class="page-item">
+                            <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}" style="border-radius: 50%;">
+                                <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" style="border-radius: 50%;">
+                                <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true" style="border-radius: 50%;">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block script %} 
+<script  src="{% static 'js/rangeslider.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,74 @@
+{%extends 'website/base.html'%}
+{% block title%} Gallery {% endblock %} 
+{% block galleryactive %} active {% endblock galleryactive %}
+{% load static %}
+{% block content %}
+<section id="gallery" class="gallery" style="margin-top: 80px;">
+    <div class="container">
+        <div class="section-head col-sm-12 mb-5">
+            <h4><span>Gallery</span></h4>
+        </div>
+    </div>
+    <div class="container-fluid" data-aos="fade-up">
+        <div class="row">
+            {% for i in page_obj.object_list %}
+            <div class="col-lg-4 col-md-6">
+              <div class="gallery-item wow fadeInUp" >
+                <a href="{{i.gallery_image.url}}" data-gall="Gallery" class="venobox">
+                  <img src="{{i.gallery_image.url}}" alt="">
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="pagination-gallery mb-3 d-flex justify-content-center text-center">
+        <nav class="pagination-outer" aria-label="Page navigation">
+            {% if page_obj.has_other_pages %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">
+                        {{ i }}
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" style="border-radius: 0 40px 40px 0;">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" style="border-radius: 0 40px 40px 0;">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+                {% endif %}
+
+            </ul>
+            {% endif %}
+        </nav>
+    </div>
+</section>
+{% endblock %}

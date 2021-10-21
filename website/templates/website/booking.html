@@ -1,0 +1,141 @@
+{%extends 'website/base.html'%}
+{% block title%} Booking {% endblock %} 
+{% load static %}
+{% block content %}
+<section id="booking">
+    <div class="breadcrumb-area contact bg-overlay ">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-text">
+                        <div class="breadcrumb-link">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>Book Now</span>
+                        </div>
+                        <h2>Booking</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="booking-form">
+                    {% for i in tourdetails %}
+                    <form action="{% url 'booking' dst_title=i.trip_title %}" method="POST" >
+                    {% endfor %}
+                        {% csrf_token %}
+                        <div class="content">
+                            <h3>Personal Information</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="firstname" class="form-control" placeholder="First Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="lastname" class="form-control" placeholder="Last Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="select-box">
+                                        <select class="form-control" name="usergender" required >
+                                            <option data-display="Gender">Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="date" name="dob" class="form-control"  placeholder="Date of Birth" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="country" class="form-control" placeholder="Country" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="email" class="form-control" placeholder="Email" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="tel" name="number" class="form-control"  placeholder="Phone Number" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="select-box">
+                                        <select class="form-control" name="traveller">
+                                            <option data-display="No of People">Number of Travellers</option>
+                                            <option value="1">1</option>
+                                            <option value="Group of 2">Group of 2</option>
+                                            <option value="Group of 4">Group of 4</option>
+                                            <option value="Group of 6">Group of 6</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" name="address" class="form-control"  placeholder="Address" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-start mb-30">
+                            <div class="col-lg-12">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="agreement" required>
+                                    <label for="agreement">By continuing, you agree to the <a href="">Terms and Conditions</a> and <a href="">Privacy Policy</a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-left mt-3">
+                            <button type="submit" class="btn-booking">Confirm Booking</button>
+                        </div>
+                        
+                    </form>
+                </div>
+               
+            </div>
+            <div class="col-lg-4">
+                <div class="list-summary">
+                    <div class="summary-item">
+                        <h4>Tour Summary</h4>
+                        {% for i in tourdetails %}
+                        <div class="summary-image">
+                            <img  src="{{i.trip_image.url}}" class="img-fluid">
+                        </div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Destination</td>
+                                    <td class="blue">{{i.trip_title|capfirst}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Days</td>
+                                    <td class="blue">{{i.trip_days}} days</td>
+                                </tr>
+                                <tr>
+                                    <td> Price</td>
+                                    <td class="blue">₹{{i.trip_price}} / per person</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block script %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+{% endblock %}

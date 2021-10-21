@@ -1,0 +1,49 @@
+{%extends 'website/base.html'%}
+{% block title%} Cancellation Policy {% endblock %} 
+{% load static %}
+{% block content %}
+<section id="cancelpolicy" class="cancelpolicy">
+    <div class="breadcrumb-area contact bg-overlay ">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-text">
+                        <div class="breadcrumb-link">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>Cancellation Policy</span>
+                        </div>
+                        <h2>Cancellation Policies for Trips</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cancellation-policy-content">
+                    <h4>Cancellation Policies for Weekend getaways</h4>
+                    <h3>Case 1 : If the Weekend Getaway is cancelled by Twist and Tours</h3>
+                    <ul>
+                        <li>In case the Weekend Getaway is cancelled by twist and tours due to any unavoidable Circumstances like Bharat bandh, Road block, natural calamity, landslides etc we will provide a Getaway Coupon where you can opt for the same or different getaway Destination for a period of one year.</li>
+                        <li>In case you want to change the Getaway destination the amount you paid previously will be adjusted if the new getaway Destination cost is greater than the cancelled Destination Cost and if the new Getaway Destination Cost is less than the remaining amount will be refunded.</li>
+                    </ul>
+                    <h3>Case 2 : If the Weekend Getaway is cancelled by the Customer</h3>
+                    <ul>
+                        <li>If the Weekend Getaway is cancelled by the customer prior to 30 days of booking date - 90% Amount will be refunded.</li>
+                        <li>If the Weekend Getaway is cancelled by the customer between to 7-29 days of booking date - 50 % Amount will be refunded.</li>
+                        <li>If the Weekend Getaway is cancelled by the customer between 1-6 days of booking date - No Amount will be refunded.</li>
+                    </ul>
+                    <h3>Case 3: In any case of cancelation, instead of the refund, you can reschedule the trip with Twist and Tours according to the dates suitable to you.</h3>
+                    <h3>Note :  In Case of seat transfer to a friend</h3>
+                    <ul>
+                        <li>If the Weekend Getaway is cancelled by the customer between 1-6 days of booking date - No Amount will be refunded.</li>
+                        <li>Replacement would not be applicable on any public transport booked for original participant, in that case booking for new member has to be done again.</li>
+                        <li>Refunds are initiated and will reach to your account between 1-14 working days of cancellation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
